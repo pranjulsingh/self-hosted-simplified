@@ -1,0 +1,16 @@
+---
+version: "2.1"
+services:
+  samba_share:
+    container_name: samba_share
+    image: samba-share:latest
+    hostname: samba_share
+    ports:
+      - ${SMB_PORT_DS:-445}:445
+      - ${SMB_PORT_NBSSN:-139}:139
+    volumes: 
+      - ${SMB_CONFIG_FILE}:/etc/samba/smb.conf
+      - ${SMB_VOL_DATA}:/data
+    environment:
+      - credentials=${SMB_CREDENTIALS:-("admin 123")}
+    restart: ${RESTART_POLICY}
