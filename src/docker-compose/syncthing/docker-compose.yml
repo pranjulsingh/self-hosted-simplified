@@ -1,0 +1,20 @@
+---
+version: "2.1"
+services:
+  syncthing:
+    image: lscr.io/linuxserver/syncthing:latest
+    container_name: syncthing
+    hostname: syncthing
+    environment:
+      - PUID=${SYNCTHING_PGID}
+      - PGID=${SYNCTHING_PUID}
+      - TZ=${SYNCTHING_TZ}
+    volumes:
+      - ${SYNCTHING_VOL_CONFIG}:/config
+      - ${SYNCTHING_VOL_DATA}:/data
+    ports:
+      - ${SYNCTHING_PORT_WEBUI}:8384
+      - ${SYNCTHING_PORT_LISTEN_TCP}:22000/tcp
+      - ${SYNCTHING_PORT_LISTEN_UDP}:22000/udp
+      - ${SYNCTHING_PORT_PD}:21027/udp
+    restart: unless-stopped

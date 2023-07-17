@@ -1,0 +1,14 @@
+---
+version: "2.1"
+services:
+  portainer:
+    container_name: portainer
+    hostname: portainer
+    image: portainer/portainer-ce:latest
+    ports:
+    - "${PORTAINER_TCP_PORT}:8000"
+    - "${PORTAINER_PORT_UI}:9443"
+    volumes:
+    - ${PORTAINER_DATA_VOL}:/data
+    - /var/run/docker.sock:/var/run/docker.sock
+    restart: ${RESTART_POLICY}

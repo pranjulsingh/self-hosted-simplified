@@ -1,0 +1,35 @@
+---
+version: "2.1"
+services:
+  firefly_database:
+    container_name: firefly_database
+    hostname: firefly_database
+    image: mysql:latest
+    restart: ${RESTART_POLICY}
+    ports: 
+    - "${FIREFLY_DB_PORT}:3306"
+    environment: 
+    - MYSQL_ROOT_PASSWORD=${FIRELFY_DB_PASS}
+    - MYSQL_DATABASE=${FIREFLY_DB_NAME}
+    volumes:
+      - ${FIREFLY_DB_VOLUME}:/var/lib/mysql
+  
+  firefly_iii:
+    container_name: firefly_iii_app
+    hostname: firefly_iii_app
+    image: fireflyiii/core:latest
+    restart: ${RESTART_POLICY}
+    ports:
+    - "${FIREFLY_HTTP_PORT}:8080"
+    environment:
+    - APP_KEY=${FIREFLY_APP_KEY}
+    - DB_HOST=firefly_database
+    - DB_PORT=3306
+    - DB_CONNECTION=mysql
+    - DB_DATABASE=${FIREFLY_DB_NAME}
+    - DB_USERNAME=root
+    - DB_PASSWORD=${FIRELFY_DB_PASS}
+    volumes:
+      - ${FIREFLY_APP_VOL}:/var/www/html/storage/upload
+    depends_on:
+      - firefly_database

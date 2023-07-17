@@ -1,0 +1,19 @@
+---
+version: "2.1"
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=${JELLYFIN_PUID}
+      - PGID=${JELLYFIN_PGID}
+      - TZ=${JELLYFIN_TIME_ZONE}
+    volumes:
+      - ${JELLYFIN_VOL_CONFIG}:/config
+      - ${JELLYFIN_MEDIA_VOLUME}:/data/media
+    ports:
+      - ${JELLYFIN_PORT_HTTP}:8096
+      - ${JELLYFIN_PORT_HTTPS}:8920
+      - ${JELLYFIN_PORT_CD_LOCAL}:7359/udp
+      - ${JELLYFIN_PORT_CD_DLNA}:1900/udp
+    restart: ${RESTART_POLICY}

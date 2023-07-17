@@ -1,0 +1,16 @@
+---
+version: "2.1"
+services:
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+    environment:
+      - PUID=${HEIMDALL_PUID}
+      - PGID=${HEIMDALL_PGID}
+      - TZ=${HEIMDALL_TIME_ZONE}
+    volumes:
+      - ${HEIMDALL_VOL_CONFIG}:/config
+    ports:
+      - ${HEIMDALL_PORT_HTTP}:80
+      - ${HEIMDALL_PORT_HTTPS}:443
+    restart: ${RESTART_POLICY}

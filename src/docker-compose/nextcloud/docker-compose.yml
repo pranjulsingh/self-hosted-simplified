@@ -1,0 +1,33 @@
+---
+version: "2.1"
+services:
+  nextcloud:
+    container_name: nextcloud
+    hostname: nextcloud
+    image: nextcloud:latest
+    restart: ${RESTART_POLICY}
+    ports:
+      - ${NEXTCLOUD_HTTPS_PORT}:80
+    environment:
+      - MYSQL_HOST=nextcloud_database
+      - MYSQL_DATABASE=${NEXTCLOUD_DB_NAME}
+      - MYSQL_USER=${NEXTCLOUD_DB_USERNAME}
+      - MYSQL_PASSWORD=${NEXTCLOUD_DB_PASSWORD}
+    volumes:
+      - ${NEXTCLOUD_APP_VOL}:/var/www/html
+      - ${NEXTCLOUD_DATA_VOL}:/var/www/html/data
+    depends_on:
+      - nextcloud_database
+
+  nextcloud_database:
+    container_name: nextcloud_database
+    hostname: nextcloud_database
+    image: mysql:8.0
+    restart: ${RESTART_POLICY}
+    environment:
+      - MYSQL_DATABASE=${NEXTCLOUD_DB_NAME}
+      - MYSQL_USER=${NEXTCLOUD_DB_USERNAME}
+      - MYSQL_PASSWORD=${NEXTCLOUD_DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${NEXTCLOUD_DB_PASSWORD}
+    volumes:
+      - ${NEXTCLOUD_DB_VOL}:/var/lib/mysql
