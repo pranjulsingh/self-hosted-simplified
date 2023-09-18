@@ -1,10 +1,7 @@
----
-version: "2.1"
 services:
     cloudflared:
       image: cloudflare/cloudflared:latest
       container_name: cloudflared
       command: tunnel --no-autoupdate run
-      environment:
-      - TUNNEL_TOKEN=${CLOUDFLARED_TUNNEL_TOKEN}
+      env_file: ${ENV_FILE_LOCATION}
       restart: ${RESTART_POLICY}

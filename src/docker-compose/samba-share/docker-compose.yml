@@ -1,9 +1,7 @@
----
-version: "2.1"
 services:
   samba_share:
     container_name: samba_share
-    image: samba-share:latest
+    image: prpranjul/samba-share:latest
     hostname: samba_share
     ports:
       - ${SMB_PORT_DS:-445}:445
