@@ -3,6 +3,8 @@ The goal of this project is to provide a simple deployment of common self hosted
 
 Like!!! (to quickly deploy applications with default config)
 ```bash
+wget https://raw.githubusercontent.com/pranjulsingh/self-hosted-simplified/main/env_setup.sh
+sudo sh env_setup.sh
 sh deploy.sh nextcloud jellyfin firefly portainer
 ```
 

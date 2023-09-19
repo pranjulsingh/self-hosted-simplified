@@ -2,7 +2,7 @@
 
 Alpine based docker image for Samba Share file server which enables file sharing accross different operating system over a network.
 
-- [Docker Hub](https://hub.docker.com/repository/docker/prpranjul/samba-share/)
+- [Docker Hub](https://hub.docker.com/r/prpranjul/samba-share/)
 
 ## To build image locally
 Run below command in the current folder

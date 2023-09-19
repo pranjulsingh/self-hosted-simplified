@@ -35,5 +35,7 @@ else
     echo "skipping docker installation"
 fi
 
+echo "cloning the repo: self-hosted-simplified"
+git clone https://github.com/pranjulsingh/self-hosted-simplified.git
 echo "env setup done"
 echo "edit config files and run deploy.sh file"
