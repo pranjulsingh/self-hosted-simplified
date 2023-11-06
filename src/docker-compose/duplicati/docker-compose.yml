@@ -1,0 +1,16 @@
+version: "2.1"
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    environment:
+      - PUID=${DUPLICATI_PUID}
+      - PGID=${DUPLICATI_PGID}
+      - TZ=${TIME_ZONE}
+    volumes:
+      - ${DUPLICATI_VOL_CONFIG}:/config
+      - ${PROJECT_LOCAL_BACKUP_DIR}:/backups
+      - ${PROJECT_HOME_DIR}:/source
+    ports:
+      - ${DUPLICATI_PORT}:8200
+    restart: unless-stopped
