@@ -13,4 +13,4 @@ services:
       - ${PROJECT_HOME_DIR}:/source
     ports:
       - ${DUPLICATI_PORT}:8200
-    restart: unless-stopped
+    restart: ${RESTART_POLICY}
