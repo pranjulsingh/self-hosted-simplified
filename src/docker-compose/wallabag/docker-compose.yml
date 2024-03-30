@@ -1,0 +1,50 @@
+version: '3'
+services:
+  wallabag:
+    image: wallabag/wallabag
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${WALLABAG_DB_PASS}
+      - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
+      - SYMFONY__ENV__DATABASE_HOST=db
+      - SYMFONY__ENV__DATABASE_PORT=${WALLABAG_DB_PORT}
+      - SYMFONY__ENV__DATABASE_NAME=wallabag
+      - SYMFONY__ENV__DATABASE_USER=wallabag
+      - SYMFONY__ENV__DATABASE_PASSWORD=wallapass
+      - SYMFONY__ENV__DATABASE_CHARSET=utf8mb4
+      - SYMFONY__ENV__DATABASE_TABLE_PREFIX="wallabag_"
+      - SYMFONY__ENV__MAILER_DSN=smtp://127.0.0.1
+      - SYMFONY__ENV__FROM_EMAIL=wallabag@example.com
+      - SYMFONY__ENV__DOMAIN_NAME=https://your-wallabag-instance.wallabag.org
+      - SYMFONY__ENV__SERVER_NAME="wallabag instance"
+    ports:
+      - ${WALLABAG_HTTP_PORT}:80
+    volumes:
+      - ${WALLABAG_APP_VOL}:/var/www/wallabag/web/assets/images
+    healthcheck:
+      test: ["CMD", "wget" ,"--no-verbose", "--tries=1", "--spider", "http://localhost/api/info"]
+      interval: 1m
+      timeout: 3s
+    depends_on:
+      - db
+      - redis
+  db:
+    image: mariadb
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${WALLABAG_DB_PASS}
+    ports: 
+      - ${WALLABAG_DB_PORT}:3306
+    volumes:
+      - ${WALLABAG_DB_VOLUME}:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 20s
+      timeout: 3s
+  redis:
+    image: redis:alpine
+    restart: unless-stopped    
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 20s
+      timeout: 3s
