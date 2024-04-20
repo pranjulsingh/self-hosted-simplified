@@ -1,0 +1,11 @@
+services:
+  filebrowser:
+    image: hurlenko/filebrowser:latest
+    container_name: filebrowser
+    user: "${UID}:${GID}"
+    volumes:
+      - ${PROJECT_HOME_DIR}:/data
+      - ${FILEBROWSER_VOLUME}:/config
+    ports:
+      - ${FILEBROWSER_HTTP_PORT}:8080
+    restart: ${RESTART_POLICY}
