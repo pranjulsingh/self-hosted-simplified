@@ -7,7 +7,7 @@ services:
     ports: 
     - "${FIREFLY_DB_PORT}:3306"
     environment: 
-    - MYSQL_ROOT_PASSWORD=${FIRELFY_DB_PASS}
+    - MYSQL_ROOT_PASSWORD=${FIREFLY_DB_PASS}
     - MYSQL_DATABASE=${FIREFLY_DB_NAME}
     volumes:
       - ${FIREFLY_DB_VOLUME}:/var/lib/mysql
@@ -26,7 +26,7 @@ services:
     - DB_CONNECTION=mysql
     - DB_DATABASE=${FIREFLY_DB_NAME}
     - DB_USERNAME=root
-    - DB_PASSWORD=${FIRELFY_DB_PASS}
+    - DB_PASSWORD=${FIREFLY_DB_PASS}
     volumes:
       - ${FIREFLY_APP_VOL}:/var/www/html/storage/upload
     depends_on:

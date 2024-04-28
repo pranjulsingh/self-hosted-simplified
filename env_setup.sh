@@ -34,7 +34,10 @@ else
     echo "docker already installed"
     echo "skipping docker installation"
 fi
-
+echo "creating docker group"
+sudo groupadd docker
+echo "adding current user to docker group"
+sudo gpasswd -a $USER docker
 echo "cloning the repo: self-hosted-simplified"
 git clone https://github.com/pranjulsingh/self-hosted-simplified.git
 echo "env setup done"

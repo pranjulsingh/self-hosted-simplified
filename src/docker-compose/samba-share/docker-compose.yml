@@ -8,7 +8,7 @@ services:
       - ${SMB_PORT_NBSSN:-139}:139
     volumes: 
       - ${SMB_CONFIG_FILE}:/etc/samba/smb.conf
-      - ${SMB_VOL_DATA}:/data
+      - ${SMB_VOL_DATA}:/root
     environment:
       - credentials=${SMB_CREDENTIALS:-("admin 123")}
     restart: ${RESTART_POLICY}
