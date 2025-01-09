@@ -5,11 +5,14 @@ Like!!! (to quickly deploy applications with default config)
 ```bash
 wget https://raw.githubusercontent.com/pranjulsingh/self-hosted-simplified/main/env_setup.sh
 sudo sh env_setup.sh
-sh deploy.sh nextcloud jellyfin firefly portainer
+cd self-hosted-simplified
+sh deploy.sh
 ```
 
 ## List of applications ready for deployment
 - cloudflared
+- duplicati
+- filebrowser
 - firefly
 - heimdall
 - jellyfin
@@ -17,6 +20,7 @@ sh deploy.sh nextcloud jellyfin firefly portainer
 - portainer
 - samba-share
 - syncthing
+- wallabag
 
 ## How to configure
 <i>
