@@ -68,7 +68,7 @@ while IFS= read -r line || [ -n "$line" ]; do
         log_message "ERROR" "Docker compose file not found for $line: $docker_compose_file"
         failed_apps+=("$line")
         continue
-    }
+    fi
     
     log_message "INFO" "Deploying $line..."
     

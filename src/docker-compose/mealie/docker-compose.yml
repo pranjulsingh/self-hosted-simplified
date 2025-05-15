@@ -1,0 +1,19 @@
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:v2.8.0
+    container_name: mealie
+    ports:
+        - ${MEALIE_PORT_HTTP}:9000
+    deploy:
+      resources:
+        limits:
+          memory: 500M
+    volumes:
+      - ${MEALIE_VOLUME}:/app/data/
+    environment:
+      - ALLOW_SIGNUP="false"
+      - PUID=${MEALIE_PUID}
+      - PGID=${MEALIE_PGID}
+      - TZ=${TIME_ZONE}
+      - BASE_URL=https://mealie.pranjul.live
+    restart: ${RESTART_POLICY}
