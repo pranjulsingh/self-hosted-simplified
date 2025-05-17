@@ -11,7 +11,7 @@ services:
     volumes:
       - ${MEALIE_VOLUME}:/app/data/
     environment:
-      - ALLOW_SIGNUP="false"
+      - ALLOW_SIGNUP=false
       - PUID=${MEALIE_PUID}
       - PGID=${MEALIE_PGID}
       - TZ=${TIME_ZONE}
